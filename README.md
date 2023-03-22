@@ -1,5 +1,8 @@
 Apres avoir cloner le dépot
-
+```bash
+git clone https://github.com/Rom-dev1/symfony-network.git
+```
+Installation des dépendances manquantes
 ``` bash
 composer install
 ```
@@ -7,6 +10,7 @@ puis
 ```bash
 npm install
 ```
+//////
 
 MAJ migrations
 ```bash
