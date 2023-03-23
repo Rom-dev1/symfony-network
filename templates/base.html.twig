@@ -13,7 +13,28 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+    <header class="">
+        <div class="max-w-5xl mx-auto flex justify-between py-8">
+            <div>
+                <h1>The Social Network</h1>
+            </div>
+            <nav class="flex space-x-4">
+                <div>
+                    <span>svg</span>
+                    <a href="#">Accueil</a>
+                </div>
+                <div>
+                    <span>svg</span>
+                    <a href="#">Membres</a>
+                </div>
+            </nav>
+        </div>
+    </header>
     <body>
-        {% block body %}{% endblock %}
+        <div class="bg-gray-200 min-h-screen p-8">
+            <div class="max-w-5xl mx-auto">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
     </body>
 </html>
