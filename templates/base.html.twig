@@ -33,7 +33,7 @@
                 </div>
                 <div>
                     {% if app.user %}
-                            <span>{{app.user.firstname}}</span>
+                            <a href="{{path('app_user')}}">{{app.user.firstname}}</a>
                             <a href="{{path('app_logout')}}" class="text-xl bg-blue-400 rounded p-1 text-white">Déconnexion</a>
                         {% else %}
                             <a href="{{path('app_login')}}" class="text-xl bg-blue-400 rounded p-1 text-white">Connection</a>

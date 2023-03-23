@@ -22,8 +22,8 @@
 
 {% for publication in publications | sort((a , b) => a.createdAt < b.createdAt) %}
     <div class="bg-white my-10 p-4 rounded">
-        <div>
-            <span>{{publication.user.avatar}}</span>
+        <div class="flex items-center space-x-1">
+            <img src="{{publication.user.avatar}}" class="rounded-full border-8 border-white w-[60px]" alt="photo de profil">
             <span>{{publication.user.firstname}}</span>
             <span>publié le {{publication.createdAt | date('d-m-Y')}}</span>
         </div>
