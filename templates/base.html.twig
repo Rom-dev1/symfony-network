@@ -14,18 +14,26 @@
         {% endblock %}
     </head>
     <header class="">
-        <div class="max-w-5xl mx-auto flex justify-between py-8">
+        <div class="max-w-5xl mx-auto flex py-6 items-center space-x-4">
             <div>
-                <h1>The Social Network</h1>
+                <h1 class="font-bold text-2xl">The Social Network</h1>
             </div>
-            <nav class="flex space-x-4">
-                <div>
-                    <span>svg</span>
-                    <a href="#">Accueil</a>
+            <nav class="flex items-center justify-between grow">
+                <div class="flex space-x-4">
+                    <div class="flex space-x-2 items-center">
+                        <div class="w-[40px] h-[40px]">
+                            {% include "svg/home.html.twig" %}
+                        </div>
+                        <a href="{{path('app_home')}}" class="text-xl">Accueil</a>
+                    </div>
+                    <div class="flex space-x-2 items-center">
+                        {% include "svg/community.html.twig" %}
+                        <a href="#" class="text-xl">Membres</a>
+                    </div>
                 </div>
                 <div>
-                    <span>svg</span>
-                    <a href="#">Membres</a>
+                    <a href="{{path('app_login')}}" class="text-xl bg-blue-400 rounded p-1 text-white">Connection</a>
+                    <a href="{{path('app_register')}}" class="text-xl bg-blue-400 rounded p-1 text-white">Inscription</a>
                 </div>
             </nav>
         </div>

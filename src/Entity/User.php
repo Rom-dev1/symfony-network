@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -33,19 +34,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $firstname = null;
+    private ?string $firstname = "pseudo";
 
     #[ORM\Column(length: 255)]
-    private ?string $username = null;
+    private ?string $username = "username";
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $avatar = null;
+    private ?string $avatar = "avatar";
 
     #[ORM\Column]
     private ?\DateTimeImmutable $dateOfBirthAt = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $biography = null;
+    private ?string $biography = "avatar";
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Publication::class, orphanRemoval: true)]
     private Collection $publications;
