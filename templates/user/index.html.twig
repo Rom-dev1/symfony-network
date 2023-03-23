@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<div class="flex maw-w-5xl">
+    <div class="w-1/4">
+        <div >
+            <img src="{{user.avatar}}" class="" alt="">
+        </div>
+        <div>
+            <span>{{user.firstname}}</span>
+            <span>{{user.dateOfBirthAt | date('d/m/Y')}}</span>
+        </div>
+        <div>
+            <span>{{user.email}}</span>
+        </div>
+        <div>
+            <p>{{user.biography}}</p>
+        </div>
+    </div>
+    <div class="w-3/4">
+        {{form_start(form)}}
+            {{form_widget(form)}}
+            <button>Publier</button>
+        {{form_end(form)}}
+
+        {% for publication in user.publications | sort((a, b) => a.createdAt < b.createdAt) %}
+            <div class="bg-white my-10 p-4 ">
+                <div class="flex items-center space-x-1">
+                    <img class="rounded-full border-8 border-white w-[60px]" src="{{publication.user.avatar}}" alt="photo de profil">
+                    <span>{{publication.user.firstname}}</span>
+                    <p> publié le {{publication.createdAt | date('d-m-Y')}}</p>
+                </div>
+                <p>{{publication.content}}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
