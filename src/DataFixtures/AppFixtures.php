@@ -39,7 +39,7 @@ class AppFixtures extends Fixture
             
             for($j = 0; $j < rand(2, 4); $j++){
                 $post = new Publication();
-                $post->setContent($faker->paragraph(rand(1, 3)));
+                $post->setContent($faker->paragraph(rand(3, 10)));
                 $post->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 week', '-1day')));
                 $post->setUser($user);
                 $manager->persist($post);
