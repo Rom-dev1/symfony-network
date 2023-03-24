@@ -3,20 +3,31 @@
 namespace App\Controller;
 
 use App\Entity\Publication;
+use App\Entity\User;
 use App\Form\PublicationType;
+use App\Form\UserType;
 use App\Repository\PublicationRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query\Expr\OrderBy;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class UserController extends AbstractController
-{
+{   
+    private $repository;
+    private $em;
+
+    public function __construct(PublicationRepository $repository,EntityManagerInterface $em)
+    {
+        $this->repository = $repository;
+        $this->em = $em;
+    }
+
     #[Route('/user', name: 'app_user')]
-    public function index(PublicationRepository $repository,Request $request,EntityManagerInterface $manager): Response
+    public function index(Request $request): Response
     {   
         $user = $this->getUser();
         $post = new Publication();
@@ -28,12 +39,31 @@ class UserController extends AbstractController
             $post->setContent($data);
             $post->setCreatedAt(new DateTimeImmutable());
             $post->setUser($this->getUser()) ;
-            $manager->persist($post);
-            $manager->flush();
+            $this->em->persist($post);
+            $this->em->flush();
 
             return $this->redirectToRoute('app_user');
         }
         return $this->render('user/index.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/user/edit', name:'app_edit')] 
+    public function edit(Request $request): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $this->em->persist($user);
+            $this->em->flush();
+
+            return $this->redirectToRoute('app_user');
+        }
+        return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

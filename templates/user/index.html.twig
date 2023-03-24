@@ -5,19 +5,24 @@
 {% block body %}
 <div class="flex maw-w-5xl">
     <div class="w-1/4">
-        <div >
-            <img src="{{user.avatar}}" class="" alt="">
-        </div>
         <div>
-            <span>{{user.firstname}}</span>
-            <span>{{user.dateOfBirthAt | date('d/m/Y')}}</span>
+            <div>
+                <img src="{{user.avatar}}" class="" alt="">
+            </div>
+            <div>
+                <span>{{user.firstname}}</span>
+                <span>{{user.dateOfBirthAt | date('d/m/Y')}}</span>
+            </div>
+            <div>
+                <span>{{user.email}}</span>
+            </div>
+            <div>
+                <p>{{user.biography}}</p>
+            </div>
         </div>
-        <div>
-            <span>{{user.email}}</span>
-        </div>
-        <div>
-            <p>{{user.biography}}</p>
-        </div>
+    <div>
+        <a href="{{path('app_edit')}}">Modifier</a>
+    </div>
     </div>
     <div class="w-3/4">
         {{form_start(form)}}
