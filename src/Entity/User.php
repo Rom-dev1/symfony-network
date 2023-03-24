@@ -27,9 +27,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
+    // /**
+    //  * @var string The hashed password
+    //  */
     #[ORM\Column]
     private ?string $password = null;
 
@@ -40,13 +40,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $username = "username";
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $avatar = "avatar";
+    private ?string $avatar = null ;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $dateOfBirthAt = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $biography = "avatar";
+    private ?string $biography = "biography";
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Publication::class, orphanRemoval: true)]
     private Collection $publications;

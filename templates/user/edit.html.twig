@@ -3,6 +3,7 @@
 {% block body %}
 
 {{form_start(form)}}
+    {{form_row(form.email)}}
     {{form_widget(form)}}
     <button>Modifier</button>
 {{form_end(form)}}

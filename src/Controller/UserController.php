@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class UserController extends AbstractController
 {   
@@ -51,13 +51,29 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/edit', name:'app_edit')] 
-    public function edit(Request $request): Response
-    {
+    public function edit(Request $request,SluggerInterface $slugger): Response
+    {   
         $user = $this->getUser();
+        dump($user);
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
+        $email = $user->getUserIdentifier();
+       
         if($form->isSubmitted() && $form->isValid()){
+            $user1 = $this->getUser();
+            $email = $user1->getUserIdentifier();
+            dump($user1);
+            // $user1 = $user->setPassword($email);
+            $avatarFile = $form->get('avatar')->getData();
+            dump($avatarFile);
+                if($avatarFile){
+                    $avatarFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeAvatarname = $slugger->slug($avatarFilename);
+                    $newFilename = $safeAvatarname.'-'.uniqid().'.'.$avatarFile->guessExtension();
+                    $avatarFile->move($this->getParameter('avatar_directory'),$newFilename);
+                //     $user->setAvatar($newFilename);
+                // }
+                }
             $this->em->persist($user);
             $this->em->flush();
 
@@ -66,6 +82,7 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
+            'email' => $email
         ]);
     }
 }
