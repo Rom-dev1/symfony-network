@@ -4,11 +4,15 @@
 
 {% block body %}
 
-
 {% for publication in publications | sort((a , b) => a.createdAt < b.createdAt) %}
     <div class="bg-white my-10 p-4 rounded">
         <div class="flex items-center space-x-1">
-            <img src="{{ asset('uploads/avatar/' ~ publication.user.avatar) }}" class="rounded-full border-8 border-white w-[100px] h-[100px]" alt="photo de profil">
+            {% for i in range(1, 99) %}
+                {% if publication.user.avatar == "https://randomuser.me/api/portraits/men/" ~ i ~ ".jpg" %}
+                <img src="{{publication.user.avatar}}" class="rounded-full border-8 border-white w-[60px]" alt="photo de profil">
+            {% endif %}
+            {% endfor %}
+            <img src="{{asset("uploads/avatar/" ~ publication.user.avatar)}} "class="rounded-full border-8 border-white w-[60px]" alt="">
             <span>{{publication.user.firstname}}</span>
             <span>publié le {{publication.createdAt | date('d-m-Y')}}</span>
         </div>

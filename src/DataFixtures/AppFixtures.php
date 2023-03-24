@@ -33,7 +33,7 @@ class AppFixtures extends Fixture
             $user->setRoles(['ROLE_USER']);
             $user->setFirstname($faker->firstName($gender[array_rand($gender)]));
             $user->setUsername($faker->lastName());
-            $user->setAvatar("uploads/avatar/photoprofil.jpg");
+            $user->setAvatar("https://randomuser.me/api/portraits/men/".rand(1,99).".jpg");
             $user->setDateOfBirthAt(\DateTimeImmutable::createFromMutable($faker->dateTimeInInterval("-30 years", "+10 years")));
             $user->setBiography($faker->text());
             
