@@ -7,7 +7,7 @@
     <div class="w-1/4">
         <div>
             <div>
-                <img src="{{user.avatar}}" class="" alt="">
+                <img src="{{ asset('uploads/avatar/' ~ user.avatar) }}" class="w-[50px] h-[50px]" alt="">
             </div>
             <div>
                 <span>{{user.firstname}}</span>

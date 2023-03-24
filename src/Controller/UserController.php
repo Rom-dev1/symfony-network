@@ -54,25 +54,26 @@ class UserController extends AbstractController
     public function edit(Request $request,SluggerInterface $slugger): Response
     {   
         $user = $this->getUser();
-        dump($user);
+        $avatar = $this->getUser(['avatar']);
+        dump($avatar);
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         $email = $user->getUserIdentifier();
+        $avatar = $user->getAvatar();
+        dump($avatar);
+        dump($email);
+        $avatar =$this->getUser('avatar');
+        dump($avatar);
        
         if($form->isSubmitted() && $form->isValid()){
-            $user1 = $this->getUser();
-            $email = $user1->getUserIdentifier();
-            dump($user1);
-            // $user1 = $user->setPassword($email);
             $avatarFile = $form->get('avatar')->getData();
-            dump($avatarFile);
                 if($avatarFile){
                     $avatarFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
                     $safeAvatarname = $slugger->slug($avatarFilename);
                     $newFilename = $safeAvatarname.'-'.uniqid().'.'.$avatarFile->guessExtension();
                     $avatarFile->move($this->getParameter('avatar_directory'),$newFilename);
-                //     $user->setAvatar($newFilename);
-                // }
+                    $new = $user->setAvatar($newFilename);
+                    dump($new);
                 }
             $this->em->persist($user);
             $this->em->flush();
@@ -80,9 +81,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_user');
         }
         return $this->render('user/edit.html.twig', [
-            'user' => $user,
             'form' => $form,
-            'email' => $email
         ]);
     }
 }

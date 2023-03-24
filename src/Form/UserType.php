@@ -19,20 +19,21 @@ class UserType extends AbstractType
             // ->add('password')
             ->add('firstname')
             ->add('username')
-            ->add('avatar', FileType::class, [
-                'label' => 'Avatar',
+            ->add('avatar', FileType::class, array('data_class' => null),[
                 'mapped' => 'false',
                 'required' => 'false',
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
                             'image/jpeg',
+                            'image/jpg',
                             'image/png',
-                            'image/jpg'
+                            'image/jfif',
                         ]
                     ])
                 ]
             ])
+                
             ->add('dateOfBirthAt')
             ->add('biography')
         ;
