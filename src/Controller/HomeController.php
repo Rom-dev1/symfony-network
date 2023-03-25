@@ -43,7 +43,6 @@ class HomeController extends AbstractController
         $publi = $pub->find($id);
         $comment = new Comment();
         $comment->getPublication();
-        dump($comment);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
@@ -51,16 +50,11 @@ class HomeController extends AbstractController
             $data = $form['content']->getData();
             $comment->setCreatedAt(new DateTimeImmutable());
             $comment->setContent($data);
-            // $comment->setPublication($this->getPublication());
-            dump($comment->setPublication($publi));
-            dump($comment->getPublication());
+            $comment->setPublication($publi);
             $comment->setUser($this->getUser());
-            dump($comment->setUser($this->getUser()));
-            dump($comment);
             $em->persist($comment);
             $em->flush();
 
-            
             return $this->redirectToRoute('app_home');
         }
 
