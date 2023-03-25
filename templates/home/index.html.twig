@@ -3,18 +3,41 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-
-{% for publication in publications | sort((a , b) => a.createdAt < b.createdAt) %}
-    <div class="bg-white my-10 p-4 rounded">
-        <div class="flex items-center space-x-1">
-            <div class="max-w-[60px] max-h-[60px] overflow-hidden rounded-full border-8 border-white w-[60px">
-                <img src="{{asset("uploads/avatar/" ~ publication.user.avatar)}} "class="" alt="photo de profil">
-            </div>
-            <span>{{publication.user.firstname}}</span>
-            <span>à publié le {{publication.createdAt | date('d-m-Y')}}</span>
-        </div>
-        <p>{{publication.content}}</p>
+{% if is_granted('ROLE_USER') %}
+<div class="flex">
+    <div class="w-1/4">
+        <h1>bonjour</h1>
+        <img src="{{asset('uploads/avatar/' ~ app.user.avatar )}}" alt="">
     </div>
-{% endfor %}
+    <div class="w-3/4">
+        {% for publication in publications | sort((a , b) => a.createdAt < b.createdAt) %}
+            <div class="bg-white my-10 p-4 rounded">
+                <div class="flex items-center space-x-1">
+                    <div class="max-w-[60px] max-h-[60px] overflow-hidden rounded-full border-8 border-white w-[60px">
+                        <img src="{{asset("uploads/avatar/" ~ publication.user.avatar)}} "class="" alt="photo de profil">
+                    </div>
+                    <span>{{publication.user.firstname}}</span>
+                    <span>à publié le {{publication.createdAt | date('d-m-Y')}}</span>
+                </div>
+                <a href="{{path('app_comment', {id: publication.id})}}">{{publication.content}}</a>
+            </div>
+    {% endfor %}
+    </div>
+</div>
+{% else %}
+    {% for publication in publications | sort((a , b) => a.createdAt < b.createdAt) %}
+        <div class="bg-white my-10 p-4 rounded">
+            <div class="flex items-center space-x-1">
+                <div class="max-w-[60px] max-h-[60px] overflow-hidden rounded-full border-8 border-white w-[60px">
+                    <img src="{{asset("uploads/avatar/" ~ publication.user.avatar)}} "class="" alt="photo de profil">
+                </div>
+                <span>{{publication.user.firstname}}</span>
+                <span>à publié le {{publication.createdAt | date('d-m-Y')}}</span>
+            </div>
+            <p>{{publication.content}}</p>
+        </div>
+    {% endfor %}
+    
+{% endif %}
 
 {% endblock %}
