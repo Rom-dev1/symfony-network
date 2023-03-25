@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="flex gap-10 flex-wrap">
+    {% for member in members %}
+        <div class="w-1/6 bg-white flex flex-col rounded overflow-hidden">
+            <img src="{{asset("uploads/avatar/" ~ member.avatar)}}" alt="photo de profil">
+            <div class="flex flex-col py-3 px-1">
+                <span>{{member.firstname}}</span>
+                <span>{{member.publications | length}} publications</span>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
