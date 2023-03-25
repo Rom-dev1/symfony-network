@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Repository\PublicationRepository;
 use App\Repository\UserRepository;
+use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -17,7 +22,6 @@ class HomeController extends AbstractController
         $publi = $pub->findAll();
 
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
             'publications' => $publi
         ]);
     }
@@ -30,6 +34,40 @@ class HomeController extends AbstractController
 
         return $this->render('home/member.html.twig', [
             'members' => $members
+        ]);
+    }
+
+    #[Route('/home/{id}', name:'app_comment')]
+    public function showComment(PublicationRepository $pub,Request $request, EntityManagerInterface $em ,$id): Response
+    {   
+        $publi = $pub->find($id);
+        $comment = new Comment();
+        $comment->getPublication();
+        dump($comment);
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $data = $form['content']->getData();
+            $comment->setCreatedAt(new DateTimeImmutable());
+            $comment->setContent($data);
+            // $comment->setPublication($this->getPublication());
+            dump($comment->setPublication($publi));
+            dump($comment->getPublication());
+            $comment->setUser($this->getUser());
+            dump($comment->setUser($this->getUser()));
+            dump($comment);
+            $em->persist($comment);
+            $em->flush();
+
+            
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('home/comment.html.twig', [
+            'publications' => $publi,
+            'form' => $form,
+            'id' => $id
         ]);
     }
 }

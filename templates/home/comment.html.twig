@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+<h1>coucou</h1>
+    {{dump(app.user)}}
+    <div class="my-8">
+        <p>{{publications.content}}</p>
+    </div>
+    <div class="flex space-y-6 flex-col">
+    {% for comment in publications.comments %}
+    
+        <p>{{comment.content}}</p>
+    
+    {% endfor %}
+    </div>
+    {{form_start(form)}}
+        {{form_widget(form)}}
+        <button>Publier</button>
+    {{form_end(form)}}
+{% endblock %}
