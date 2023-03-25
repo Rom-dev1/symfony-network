@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $username = "username";
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $avatar = null ;
+    private ?string $avatar = "photoprofil.jpg" ;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $dateOfBirthAt = null;

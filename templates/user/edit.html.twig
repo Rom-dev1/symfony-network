@@ -3,8 +3,9 @@
 {% block body %}
 
 {{form_start(form)}}
-    {{form_start(form.firstname)}}
-    {# {{form_row(form.avatar)}} #}
+    {{form_widget(form)}}
+    <a href="https://fr.xavatar.io/#generateur">Tu souhaites créer un avatar pour ta photo de profil, suis ce lien
+    </a>
     <button>Modifier</button>
 {{form_end(form)}}
 

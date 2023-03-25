@@ -54,16 +54,8 @@ class UserController extends AbstractController
     public function edit(Request $request,SluggerInterface $slugger): Response
     {   
         $user = $this->getUser();
-        $avatar = $this->getUser(['avatar']);
-        dump($avatar);
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-        $email = $user->getUserIdentifier();
-        $avatar = $user->getAvatar();
-        dump($avatar);
-        dump($email);
-        $avatar =$this->getUser('avatar');
-        dump($avatar);
        
         if($form->isSubmitted() && $form->isValid()){
             $avatarFile = $form->get('avatar')->getData();
