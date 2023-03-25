@@ -13,8 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+#[Route('/user', name:'app_user')]
+#[IsGranted('ROLE_USER')]
 class UserController extends AbstractController
 {   
     private $repository;
@@ -26,7 +29,7 @@ class UserController extends AbstractController
         $this->em = $em;
     }
 
-    #[Route('/user', name: 'app_user')]
+    #[Route('/one', name: '_one')]
     public function index(Request $request): Response
     {   
         $user = $this->getUser();
@@ -42,7 +45,7 @@ class UserController extends AbstractController
             $this->em->persist($post);
             $this->em->flush();
 
-            return $this->redirectToRoute('app_user');
+            return $this->redirectToRoute('app_user_one');
         }
         return $this->render('user/index.html.twig', [
             'user' => $user,
@@ -50,7 +53,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/user/edit', name:'app_edit')] 
+    #[Route('/edit', name:'_edit')] 
     public function edit(Request $request,SluggerInterface $slugger): Response
     {   
         $user = $this->getUser();
@@ -70,7 +73,7 @@ class UserController extends AbstractController
             $this->em->persist($user);
             $this->em->flush();
 
-            return $this->redirectToRoute('app_user');
+            return $this->redirectToRoute('app_user_one');
         }
         return $this->render('user/edit.html.twig', [
             'form' => $form,
