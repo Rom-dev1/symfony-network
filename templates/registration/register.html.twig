@@ -10,7 +10,7 @@
             {{form_row(registrationForm.plainPassword.first, {attr: {class: "w-full p-2 rounded"}})}} 
             {{form_row(registrationForm.plainPassword.second, {attr: {class: "w-full p-2 rounded"}})}}
             {{ form_row(registrationForm.agreeTerms) }}
-            {{dump(form_errors(registrationForm | ))}}
+            {# {{dump(form_errors(registrationForm | ))}} #}
             <button formnovalidate class="w-full text-center bg-blue-400 p-2 rounded text-white">Inscription</button>
         {{ form_end(registrationForm) }}
     </div>
