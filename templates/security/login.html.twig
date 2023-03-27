@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<div class="max-w-2xl mx-auto my-[60px]">
+<div class="max-w-2xl mx-auto my-[60px] p-5 rounded border-4 border-gray-300">
     <form method="post" class="space-y-5">
         {% if error %}
             <div class="text-red-400 bg-red-200 p-2 border-2 border-red-400 text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
