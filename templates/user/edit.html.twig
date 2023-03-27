@@ -9,7 +9,7 @@
                     <img class="w-full" src="{{ asset('uploads/avatar/' ~ app.user.avatar) }}" alt="">
                 </div>
                 <div class="border-b-2 p-2">
-                    <span>{{app.user.firstname}}</span>
+                    <p>{{app.user.firstname}} né le </p>
                     <span>{{app.user.dateOfBirthAt | date('d/m/Y')}}</span>
                 </div>
                 <div class="border-b-2 p-2">

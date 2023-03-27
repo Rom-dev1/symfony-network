@@ -2,15 +2,18 @@
 
 
 {% block body %}
-<h1>coucou</h1>
-    <div class="my-8">
+<h1 class="text-xl">Poster un commentaire</h1>
+    <div class="my-8 bg-white p-2 rounded border-2 border-black">
         <p>{{publications.content}}</p>
+        <p class="text-gray-400 text-sm">publié par {{publications.user.firstname}} {{ago |ago(locale='fr')}}</p>
     </div>
     <div class="flex space-y-6 flex-col">
     {% for comment in publications.comments %}
-    
-        <p>{{comment.content}}</p>
-    
+        <div class="bg-white w-fit p-2 border-2 rounded border-blue-200">
+            <p>{{comment.content}}</p>
+            <span class="text-gray-400 text-sm">{{comment.user.firstname}} a commenté le {{ago |ago(locale='fr')}}</span>
+            
+        </div>
     {% endfor %}
     </div>
     {{form_start(form)}}

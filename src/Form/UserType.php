@@ -15,8 +15,6 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            // ->add('roles')
-            // ->add('password')
             ->add('firstname')
             ->add('username')
             ->add('avatar', FileType::class, array('data_class' => null),[
@@ -34,7 +32,12 @@ class UserType extends AbstractType
                 ]
             ])
                 
-            ->add('dateOfBirthAt')
+            ->add('dateOfBirthAt', null , array(
+                'widget' => 'choice',
+                'years' => range(date('Y'), date('Y')-100),
+                'months' => range('m', 12),
+                'days' => range('d', 31),
+              ))
             ->add('biography')
         ;
     }

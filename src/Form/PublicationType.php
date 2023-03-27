@@ -12,10 +12,9 @@ class PublicationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('content')
-            // ->add('createdAt')
-            // ->add('user')
-        ;
+            ->add('content',null,  [
+                'label' => 'Publication',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

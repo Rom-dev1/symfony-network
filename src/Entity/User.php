@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -34,6 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank, Assert\Length(['min'=> 2, 'minMessage' => 'Saisie minimum de 2 caractères'])]
     private ?string $firstname = "firstname";
 
     #[ORM\Column(length: 255)]
@@ -46,6 +48,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?\DateTimeImmutable $dateOfBirthAt = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank, Assert\Length(['min'=> 10, 'minMessage' => 'Saisie minimum de 20 caractères'])]
     private ?string $biography = "biography";
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Publication::class, orphanRemoval: true)]
