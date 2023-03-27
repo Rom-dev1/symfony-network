@@ -59,7 +59,7 @@ class UserController extends AbstractController
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-       
+        
         if($form->isSubmitted() && $form->isValid()){
             $avatarFile = $form->get('avatar')->getData();
                 if($avatarFile){

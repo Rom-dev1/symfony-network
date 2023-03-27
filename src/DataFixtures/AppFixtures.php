@@ -37,22 +37,23 @@ class AppFixtures extends Fixture
             $user->setDateOfBirthAt(\DateTimeImmutable::createFromMutable($faker->dateTimeInInterval("-30 years", "+10 years")));
             $user->setBiography($faker->text());
             
-            for($j = 0; $j < rand(1, 2); $j++){
+            for($j = 0; $j < rand(1, 3); $j++){
                 $post = new Publication();
                 $post->setContent($faker->paragraph(rand(3, 10)));
-                $post->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 week', '-1day')));
+                $post->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-2 week', '-1day')));
                 $post->setUser($user);
                 $manager->persist($post);
 
-                for($k = 0; $k < rand(1,3); $k++){
+                for($k = 0; $k < rand(2,4); $k++){
                     $comment = new Comment();
                     $comment->setContent($faker->text());
-                    $comment->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('$post->getCreatedAt', 'now')));
+                    $comment->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1week', 'now')));
                     $comment->setPublication($post);
                     $comment->setUser($user);
                     $manager->persist($comment);
                 }
             }
+            
             $manager->persist($user);
         }
         $manager->flush();
