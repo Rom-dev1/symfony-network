@@ -25,11 +25,11 @@
                         <div class="w-[40px] h-[40px]">
                             {% include "svg/home.html.twig" %}
                         </div>
-                        <a href="{{path('app_home')}}" class="text-xl">Accueil</a>
+                        <a href="{{path('app_home')}}" class="text-xl hover:underline hover:underline-offset-8 decoration-black">Accueil</a>
                     </div>
                     <div class="flex space-x-2 items-center">
                         {% include "svg/community.html.twig" %}
-                        <a href="{{path('app_member')}}" class="text-xl">Membres</a>
+                        <a href="{{path('app_member')}}" class="text-xl hover:underline hover:underline-offset-8 decoration-black">Membres</a>
                     </div>
                 </div>
                 <div>
@@ -42,8 +42,10 @@
                             <a href="{{path('app_logout')}}" class="text-xl bg-blue-400 rounded p-1 text-white">Déconnexion</a>
                         </div>
                         {% else %}
+                        <div class="space-x-5">
                             <a href="{{path('app_login')}}" class="text-xl bg-blue-400 rounded p-1 text-white">Connection</a>
                             <a href="{{path('app_register')}}" class="text-xl bg-blue-400 rounded p-1 text-white">Inscription</a>
+                        </div>
                     {% endif %}
                 </div>
             </nav>

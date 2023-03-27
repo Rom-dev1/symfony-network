@@ -1,5 +1,6 @@
 {% extends "base.html.twig" %}
 
+{% block title %}Commentaires{% endblock %}
 
 {% block body %}
 <h1 class="text-xl">Poster un commentaire</h1>
@@ -9,10 +10,14 @@
     </div>
     <div class="flex space-y-6 flex-col">
     {% for comment in publications.comments %}
-        <div class="bg-white w-fit p-2 border-2 rounded border-blue-200">
-            <p>{{comment.content}}</p>
-            <span class="text-gray-400 text-sm">{{comment.user.firstname}} a commenté le {{comment.createdAt | ago}}</span>
-            
+        <div class="bg-white w-fit p-3 border-2 rounded border-blue-200 flex space-x-8">
+            <div class="">
+                <img src="{{asset("uploads/avatar/" ~ comment.user.avatar)}}" class="max-w-[60px] man-h-[60px] rounded-full" alt="photo de profil">
+            </div>
+            <div>
+                <p class="text-gray-400 text-sm">{{comment.user.firstname}} a commenté {{comment.createdAt | ago(locale='fr')}}</p>
+                <p>{{comment.content}}</p>
+            </div>
         </div>
     {% endfor %}
     </div>

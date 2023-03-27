@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<div class="flex maw-w-5xl space-x-4">
+<div class="flex maw-w-5xl space-x-4 p-4 border-4 border-gray-300 rounded ">
     <div class="w-1/4">
          <div class=" bg-white rounded overflow-hidden">
             <div>
@@ -20,18 +20,17 @@
                 </div>
             </div>
         </div>
-        <div class="text-center my-4"> 
+        {# <div class="text-center my-4"> 
             <a href="{{path('app_user_edit')}}" class="text-center mx-auto bg-red-400 border-2 rounded p-2  border-black">Modifier</a>
-        </div>
+        </div> #}
         <div class="text-center my-8">
-            <a href="{{path('app_logout')}}" class="text-center mx-auto bg-blue-400 border-2 rounded p-2  border-black">Déconnexion</a>
+            <a href="{{path('app_user_delete')}}" class="text-center mx-auto bg-blue-400 border-2 rounded p-2  border-black">Supprimer mon compte</a>
         </div>
     </div>
    
     <div class="w-3/4">
         {{form_start(form)}}
             {{form_widget(form)}}
-            </a>
             <button formnovalidate class="text-center mx-auto bg-red-400 border-2 rounded p-2  border-black">Modifier</button>
         {{form_end(form)}}
         <a href="https://fr.xavatar.io/#generateur" target="_blank" class="font-semibold decoration-black hover:underline">Tu souhaites créer un avatar pour ta photo de profil, suis ce lien
