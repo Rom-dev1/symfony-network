@@ -6,11 +6,11 @@
     <div class="max-w-2xl mx-auto my-[60px] space-y-3">
         <h1 class="text-center text-2xl">Inscription</h1>
         {{ form_start(registrationForm, {attr: {class: "space-y-6"}}) }}
+            {{ form_row(registrationForm.firstname, {attr: {class: "w-full p-2 rounded"}})}}
             {{ form_row(registrationForm.email, {attr : {class: "w-full p-2 rounded"}}) }}
-            {{form_row(registrationForm.plainPassword.first, {attr: {class: "w-full p-2 rounded"}})}} 
-            {{form_row(registrationForm.plainPassword.second, {attr: {class: "w-full p-2 rounded"}})}}
+            {{ form_row(registrationForm.plainPassword.first, {attr: {class: "w-full p-2 rounded"}})}} 
+            {{ form_row(registrationForm.plainPassword.second, {attr: {class: "w-full p-2 rounded"}})}}
             {{ form_row(registrationForm.agreeTerms) }}
-            {# {{dump(form_errors(registrationForm | ))}} #}
             <button formnovalidate class="w-full text-center bg-blue-400 p-2 rounded text-white">Inscription</button>
         {{ form_end(registrationForm) }}
     </div>
