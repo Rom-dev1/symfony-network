@@ -19,7 +19,7 @@
                         <img src="{{asset("uploads/avatar/" ~ publication.user.avatar)}} "class="" alt="photo de profil">
                     </div>
                     <span>{{publication.user.firstname}}</span>
-                    <span>à publié le {{publication.createdAt | date('d-m-Y')}}</span>
+                    <span>à publié le {{publication.createdAt | ago(locale='fr')}}</span>
                 </div>
                 <a href="{{path('app_comment', {id: publication.id})}}">{{publication.content}}</a>
             </div>

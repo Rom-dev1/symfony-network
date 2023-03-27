@@ -8,6 +8,7 @@ use App\Repository\PublicationRepository;
 use App\Repository\UserRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Bundle\TimeBundle\DateTimeFormatter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +39,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/home/{id}', name:'app_comment')]
-    public function showComment(PublicationRepository $pub,Request $request, EntityManagerInterface $em ,$id): Response
+    public function showComment(PublicationRepository $pub,Request $request, EntityManagerInterface $em,   DateTimeFormatter $dateTimeFormat ,$id): Response
     {   
         $publi = $pub->find($id);
         $comment = new Comment();
@@ -61,7 +62,7 @@ class HomeController extends AbstractController
         return $this->render('home/comment.html.twig', [
             'publications' => $publi,
             'form' => $form,
-            'id' => $id
+            'id' => $id,
         ]);
     }
 }

@@ -41,7 +41,7 @@
                 <div class="flex items-center space-x-1">
                     <img class="rounded-full border-8 border-white w-[60px]" src="{{ asset('uploads/avatar/' ~ user.avatar) }}" alt="photo de profil">
                     <span>{{publication.user.firstname}}</span>
-                    <p>a publié le {{publication.createdAt | date('d-m-Y')}}</p>
+                    <p>a publié le {{publication.createdAt | ago(locale = 'fr')}}</p>
                 </div>
                 <p>{{publication.content}}</p>
             </div>
