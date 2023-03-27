@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -59,17 +60,16 @@ class UserController extends AbstractController
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-        
+
         if($form->isSubmitted() && $form->isValid()){
             $avatarFile = $form->get('avatar')->getData();
-                if($avatarFile){
-                    $avatarFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
-                    $safeAvatarname = $slugger->slug($avatarFilename);
-                    $newFilename = $safeAvatarname.'-'.uniqid().'.'.$avatarFile->guessExtension();
-                    $avatarFile->move($this->getParameter('avatar_directory'),$newFilename);
-                    $new = $user->setAvatar($newFilename);
-                    dump($new);
-                }
+            if($avatarFile){
+                $avatarFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeAvatarname = $slugger->slug($avatarFilename);
+                $newFilename = $safeAvatarname.'-'.uniqid().'.'.$avatarFile->guessExtension();
+                $avatarFile->move($this->getParameter('avatar_directory'),$newFilename);
+                $user = $user->setAvatar($newFilename);
+            };
             $this->em->persist($user);
             $this->em->flush();
 
@@ -78,5 +78,18 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'form' => $form,
         ]);
+    }
+
+    #[Route('/delete', name:'_delete')]
+    public function delete()
+    {
+        $user =$this->getUser();
+        $this->em->remove($user);
+        $this->em->flush();
+        $session = new Session();
+        $session->invalidate();
+
+        $this->addFlash('success', 'Votre compte a bien été supprimé');
+        return $this->redirectToRoute('app_login');
     }
 }
