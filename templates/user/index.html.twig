@@ -5,29 +5,35 @@
 {% block body %}
 <div class="flex maw-w-5xl space-x-4">
     <div class="w-1/4">
-        <div>
+         <div class=" bg-white rounded overflow-hidden">
             <div>
-                <img src="{{ asset('uploads/avatar/' ~ user.avatar) }}" alt="">
-            </div>
-            <div>
-                <span>{{user.firstname}}</span>
-                <span>{{user.dateOfBirthAt | date('d/m/Y')}}</span>
-            </div>
-            <div>
-                <span>{{user.email}}</span>
-            </div>
-            <div>
-                <p>{{user.biography}}</p>
+                <div class="w-full">
+                    <img class="w-full" src="{{ asset('uploads/avatar/' ~ user.avatar) }}" alt="">
+                </div>
+                <div class="border-b-2 p-2">
+                    <span>{{user.firstname}}</span>
+                    <span>{{user.dateOfBirthAt | date('d/m/Y')}}</span>
+                </div>
+                <div class="border-b-2 p-2">
+                    <span>{{user.email}}</span>
+                </div>
+                <div class="border-b-2 p-2">
+                    <p>{{user.biography}}</p>
+                </div>
             </div>
         </div>
-    <div>
-        <a href="{{path('app_user_edit')}}">Modifier</a>
+        <div class="text-center my-4"> 
+            <a href="{{path('app_user_edit')}}" class="text-center mx-auto bg-red-400 border-2 rounded p-2  border-black">Modifier</a>
+        </div>
+        <div class="text-center my-8">
+            <a href="{{path('app_logout')}}" class="text-center mx-auto bg-blue-400 border-2 rounded p-2  border-black">Déconnexion</a>
+        </div>
     </div>
-    </div>
+   
     <div class="w-3/4">
         {{form_start(form)}}
-            {{form_widget(form)}}
-            <button>Publier</button>
+            {{form_row(form.content,  {attr: {class:"w-full rounded p-2"}})}}
+            <button class="bg-blue-400 border-2 border-black p-2 my-2 rounded">Publier</button>
         {{form_end(form)}}
 
         {% for publication in user.publications | sort((a, b) => a.createdAt < b.createdAt) %}
