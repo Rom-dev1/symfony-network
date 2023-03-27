@@ -4,3 +4,23 @@
     {% set error_item_class = error_item_class|default('text-white text-sm') %}
     {{ parent()}}
 {% endblock %}
+
+{%- block widget_attributes -%}
+    {%- set attr = attr|merge({ class: attr.class|default(widget_class|default('m w-full p-2 rounded')) ~ (disabled ? ' ' ~ widget_disabled_class|default('border-gray-800 text-gray-500')) ~ (errors|length ? ' ' ~ widget_errors_class|default('border-red-700')) }) -%}
+    {{parent() }}
+{%- endblock widget_attributes -%}
+
+{% block datetime_widget %}
+    {% set attr = attr|merge({class : attr.class|default('flex w-full gap-3')}) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block date_widget %}
+    {% set attr = attr|merge({class : attr.class|default('flex w-full gap-3')}) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block time_widget %}
+    {% set attr = attr|merge({class : attr.class|default('flex w-full items-center gap-3')}) %}
+    {{ parent() }}
+{% endblock %}
