@@ -36,7 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank, Assert\Length(['min'=> 2, 'minMessage' => 'Saisie minimum de 2 caractères'])]
-    private ?string $firstname = "firstname";
+    private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
     private ?string $username = "username";
@@ -49,7 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank, Assert\Length(['min'=> 10, 'minMessage' => 'Saisie minimum de 20 caractères'])]
-    private ?string $biography = "biography";
+    private ?string $biography = "biography à modifier des que tu veux";
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Publication::class, orphanRemoval: true)]
     private Collection $publications;
