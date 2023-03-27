@@ -4,10 +4,12 @@
 
 {% block body %}
 {% if is_granted('ROLE_USER') %}
-<div class="flex">
-    <div class="w-1/4">
-        <h1>bonjour</h1>
-        <img src="{{asset('uploads/avatar/' ~ app.user.avatar )}}" alt="">
+<div class="flex space-x-8">
+    <div class="w-1/4 mt-8">
+        <div class="rounded-full border-8 border-white overflow-hidden">
+            <img src="{{asset('uploads/avatar/' ~ app.user.avatar )}}" alt="photo de profil">
+        </div>
+        <p class="font-bold text-xl mt-4">Salut {{app.user.firstname}}, comment ça va ?</p>
     </div>
     <div class="w-3/4">
         {% for publication in publications | sort((a , b) => a.createdAt < b.createdAt) %}

@@ -1,12 +1,42 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+<div class="flex maw-w-5xl space-x-4">
+    <div class="w-1/4">
+         <div class=" bg-white rounded overflow-hidden">
+            <div>
+                <div class="w-full">
+                    <img class="w-full" src="{{ asset('uploads/avatar/' ~ app.user.avatar) }}" alt="">
+                </div>
+                <div class="border-b-2 p-2">
+                    <span>{{app.user.firstname}}</span>
+                    <span>{{app.user.dateOfBirthAt | date('d/m/Y')}}</span>
+                </div>
+                <div class="border-b-2 p-2">
+                    <span>{{app.user.email}}</span>
+                </div>
+                <div class="border-b-2 p-2">
+                    <p>{{app.user.biography}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center my-4"> 
+            <a href="{{path('app_user_edit')}}" class="text-center mx-auto bg-red-400 border-2 rounded p-2  border-black">Modifier</a>
+        </div>
+        <div class="text-center my-8">
+            <a href="{{path('app_logout')}}" class="text-center mx-auto bg-blue-400 border-2 rounded p-2  border-black">Déconnexion</a>
+        </div>
+    </div>
+   
+    <div class="w-3/4">
+        {{form_start(form)}}
+            {{form_widget(form)}}
+            </a>
+            <button formnovalidate class="text-center mx-auto bg-red-400 border-2 rounded p-2  border-black">Modifier</button>
+        {{form_end(form)}}
+        <a href="https://fr.xavatar.io/#generateur" target="_blank" class="font-semibold decoration-black hover:underline">Tu souhaites créer un avatar pour ta photo de profil, suis ce lien
+    </div>
+</div>
 
-{{form_start(form)}}
-    {{form_widget(form)}}
-    <a href="https://fr.xavatar.io/#generateur">Tu souhaites créer un avatar pour ta photo de profil, suis ce lien
-    </a>
-    <button>Modifier</button>
-{{form_end(form)}}
 
 {% endblock %}
