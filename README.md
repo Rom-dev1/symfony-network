@@ -6,7 +6,7 @@ Installation des dépendances manquantes
 ``` bash
 composer install
 ```
-puis 
+puis
 ```bash
 npm install
 ```

@@ -22,14 +22,13 @@
                 </div>
             </div>
         </div>
-        <div class="text-center my-4"> 
+        <div class="text-center my-4">
             <a href="{{path('app_user_edit')}}" class="text-center text-white mx-auto bg-red-400 border-2 rounded p-2  border-gray-300">Modifier</a>
         </div>
         <div class="text-center my-8">
             <a href="{{path('app_logout')}}" class="text-center text-white mx-auto bg-blue-400 border-2 rounded p-2  border-gray-300">Déconnexion</a>
         </div>
     </div>
-   
     <div class="w-3/4">
         {{form_start(form)}}
             {{form_row(form.content,  {attr: {class:"w-full rounded p-2 border-2 border-gray-400"}})}}

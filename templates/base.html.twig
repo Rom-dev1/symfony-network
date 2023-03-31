@@ -36,7 +36,7 @@
                     {% if app.user %}
                         <div class="flex items-center space-x-6">
                             <a href="{{path('app_user_one')}}">{{app.user.firstname}}</a>
-                            <div class="w-[50px] h-[50px] rounded-full overflow-hidden"> 
+                            <div class="w-[50px] h-[50px] rounded-full overflow-hidden">
                                 <img src="{{asset('uploads/avatar/' ~ app.user.avatar )}}" alt="photo de profil">
                             </div>
                             <a href="{{path('app_logout')}}" class="text-xl bg-blue-400 rounded p-1 text-white">Déconnexion</a>

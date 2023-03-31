@@ -11,7 +11,7 @@ use Faker\Factory;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
-{   
+{
     private $hasher;
 
     public function __construct(UserPasswordHasherInterface $hasher)
@@ -25,7 +25,7 @@ class AppFixtures extends Fixture
         // $manager->persist($product);
         $faker = Factory::create('fr_FR');
         $gender = [null, 'male', 'female'];
-        
+
         for($i = 0; $i <10; $i++){
             $user = new User();
             $user->setEmail($faker->word().rand(1,99).'@mail.com');
@@ -36,7 +36,7 @@ class AppFixtures extends Fixture
             // $user->setAvatar("https://randomuser.me/api/portraits/men/".rand(1,99).".jpg");
             $user->setDateOfBirthAt(\DateTimeImmutable::createFromMutable($faker->dateTimeInInterval("-30 years", "+10 years")));
             $user->setBiography($faker->text());
-            
+
             for($j = 0; $j < rand(1, 3); $j++){
                 $post = new Publication();
                 $post->setContent($faker->paragraph(rand(3, 10)));
@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
                     $manager->persist($comment);
                 }
             }
-            
+
             $manager->persist($user);
         }
         $manager->flush();

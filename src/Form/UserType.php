@@ -37,7 +37,6 @@ class UserType extends AbstractType
                     ])
                 ]
             ])
-                
             ->add('dateOfBirthAt', BirthdayType::class , array(
                 'widget' => 'choice',
                 'label' => 'date de naissance',

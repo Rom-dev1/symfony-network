@@ -18,14 +18,14 @@ class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
     public function index(PublicationRepository $pub): Response
-    {   
+    {
         $publi = $pub->findAll();
 
         return $this->render('home/index.html.twig', [
             'publications' => $publi
         ]);
     }
-    
+
     #[Route('/member', name:'app_member')]
     #[IsGranted('ROLE_USER')]
     public function showMember(UserRepository $members) : Response
@@ -36,11 +36,11 @@ class HomeController extends AbstractController
             'members' => $members
         ]);
     }
-    
+
     #[IsGranted('ROLE_USER')]
     #[Route('/home/{id}', name:'app_comment')]
     public function showComment(PublicationRepository $pub,Request $request, EntityManagerInterface $em,$id): Response
-    {   
+    {
         $publi = $pub->find($id);
         $comment = new Comment();
         $comment->getPublication();

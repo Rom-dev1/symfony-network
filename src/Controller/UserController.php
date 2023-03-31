@@ -21,7 +21,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route('/user', name:'app_user')]
 #[IsGranted('ROLE_USER')]
 class UserController extends AbstractController
-{   
+{
     private $repository;
     private $em;
 
@@ -33,7 +33,7 @@ class UserController extends AbstractController
 
     #[Route('/one', name: '_one')]
     public function index(Request $request): Response
-    {   
+    {
         $user = $this->getUser();
         $post = new Publication();
         $form = $this->createForm(PublicationType::class, $post);
@@ -55,9 +55,9 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/edit', name:'_edit')] 
+    #[Route('/edit', name:'_edit')]
     public function edit(Request $request,SluggerInterface $slugger): Response
-    {   
+    {
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -96,5 +96,5 @@ class UserController extends AbstractController
         $this->addFlash('success', 'Votre compte a bien été supprimé');
         return $this->redirectToRoute('app_login');
     }
-    
+
 }
