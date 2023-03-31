@@ -26,9 +26,9 @@ class AppFixtures extends Fixture
         $faker = Factory::create('fr_FR');
         $gender = [null, 'male', 'female'];
         
-        for($i = 0; $i <5; $i++){
+        for($i = 0; $i <10; $i++){
             $user = new User();
-            $user->setEmail($faker->word().'@mail.com');
+            $user->setEmail($faker->word().rand(1,99).'@mail.com');
             $user->setPassword($this->hasher->hashPassword($user, "password")); //@todo rmettre le hasher $this->hasher->hashPassword($user, $faker->word())
             $user->setRoles(['ROLE_USER']);
             $user->setFirstname($faker->firstName($gender[array_rand($gender)]));

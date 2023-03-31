@@ -10,6 +10,7 @@ use App\Repository\PublicationRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -60,6 +61,9 @@ class UserController extends AbstractController
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
+        // dump($this->getParameter('avatar_directory'));
+       dump($user->getAvatar());
+        // dump($user->setAvatar(new File($this->getParameter('avatar_directory').'/'.$user->getAvatar())));
 
         if($form->isSubmitted() && $form->isValid()){
             $avatarFile = $form->get('avatar')->getData();
