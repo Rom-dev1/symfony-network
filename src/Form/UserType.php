@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use DateTimeImmutable;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -39,7 +40,8 @@ class UserType extends AbstractType
                 
             ->add('dateOfBirthAt', BirthdayType::class , array(
                 'widget' => 'choice',
-                'label' => 'date de naissance'
+                'label' => 'date de naissance',
+                'input' => 'datetime_immutable',
                 // 'years' => range(date('Y'), date('Y')-100),
                 // 'months' => range('m', 12),
                 // 'days' => range('d', 31),
