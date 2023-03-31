@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,8 +16,12 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('firstname')
-            ->add('username')
+            ->add('firstname', null, [
+                'label' => 'Prenom'
+            ])
+            ->add('username', null, [
+                'label' => 'Pseudo'
+            ])
             ->add('avatar', FileType::class, array('data_class' => null),[
                 'mapped' => 'false',
                 'required' => 'false',
@@ -32,13 +37,16 @@ class UserType extends AbstractType
                 ]
             ])
                 
-            ->add('dateOfBirthAt', null , array(
+            ->add('dateOfBirthAt', BirthdayType::class , array(
                 'widget' => 'choice',
-                'years' => range(date('Y'), date('Y')-100),
-                'months' => range('m', 12),
-                'days' => range('d', 31),
+                'label' => 'date de naissance'
+                // 'years' => range(date('Y'), date('Y')-100),
+                // 'months' => range('m', 12),
+                // 'days' => range('d', 31),
               ))
-            ->add('biography')
+            ->add('biography', null, [
+                'label' => 'biographie'
+            ])
         ;
     }
 
