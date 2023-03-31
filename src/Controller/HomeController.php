@@ -36,7 +36,8 @@ class HomeController extends AbstractController
             'members' => $members
         ]);
     }
-
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('/home/{id}', name:'app_comment')]
     public function showComment(PublicationRepository $pub,Request $request, EntityManagerInterface $em,$id): Response
     {   
